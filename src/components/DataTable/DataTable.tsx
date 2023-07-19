@@ -8,7 +8,8 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle } from '@mui/material'; 
+    DialogTitle, 
+    Typography} from '@mui/material'; 
 
 // Internal Imports
 import { serverCalls } from '../../api';
@@ -94,7 +95,9 @@ const columns: GridColDef[] = [
         getData()
     }
 
+    const myAuth = localStorage.getItem('myAuth')
 
+    if (myAuth === 'true'){
     return (
         <Box sx={{ height: 400, width: '100%'}}>
             <DataGrid
@@ -125,5 +128,11 @@ const columns: GridColDef[] = [
                 </DialogActions>
             </Dialog>
         </Box>
-    )
+        )} else {
+            return (
+                <Box>
+                    <Typography variant='h4'>Please Sign In to View your Drones!</Typography>
+                </Box>
+            )
+        }
   }

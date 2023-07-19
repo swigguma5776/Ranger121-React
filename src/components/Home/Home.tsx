@@ -3,6 +3,7 @@ import React from 'react';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material'; 
 import { Link } from 'react-router-dom'; 
+import { signOut } from 'firebase/auth'; 
 
 //Internal Imports
 import drone_image from '../../assets/Images/pretty_flowers.jpg';
@@ -68,7 +69,7 @@ const MainText = styled('div')({
 })
 
 export const Home = (props: Props) => {
-
+    const myAuth = localStorage.getItem('myAuth')
     return (
         <Root>
             <NavBarContainer>
@@ -79,18 +80,22 @@ export const Home = (props: Props) => {
                     <li>
                         <NavA to='/'>Home</NavA>
                     </li>
-                    <li>
+                    {myAuth === 'true' ? 
+                        <><li>
                         <NavA to='/dashboard'>Dashboard</NavA>
-                    </li>
-                    <li>
-                        <NavA to='/signin'>Sign In</NavA>
-                    </li>
-                    <li>
-                        <NavA to='/signin'>Sign Up</NavA>
-                    </li>
-                </LogoNavigation>
-            </NavBarContainer>
-            <Main>
+                       </li><li>
+                            <NavA to='/signin'>Sign Out</NavA>
+                        </li></>
+                        :
+                         <><li>
+                         <NavA to='/signin'>Sign In</NavA>
+                        </li><li>
+                             <NavA to='/signup'>Sign Up</NavA>
+                         </li></>
+                    }  
+                   
+            </LogoNavigation>
+        </NavBarContainer><Main>
                 <MainText>
                     <h1>{props.title}</h1>
                     <p> Welcome to our Drone page!!!</p>
